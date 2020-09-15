@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -30,7 +31,9 @@ public class MasterProcess implements Runnable {
             while(!signalIndicator.isRoundCompleted()){
                 Thread.sleep(10);
             }
-            myMessages.messageList  = myMessages.newMessageList;
+            for(int k=0;k<myMessages.newMessageList.length;k++)
+                myMessages.messageList[k] = myMessages.newMessageList[k];
+            Arrays.fill(myMessages.newMessageList,"");
             //round has completed
             synchronized (signalIndicator){
                 iterator = myProcesses.iterator();
