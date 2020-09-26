@@ -1,9 +1,15 @@
 import java.util.concurrent.Semaphore;
 
+/**
+ * SignalIndicator class maintains consistency among all the thread processes using a counter and semaphore permit count of 1
+ */
 public class SignalIndicator {
     private static int counter = 0;
     public Semaphore semaphore = new Semaphore(1);
 
+    /**
+     * Whenever a thread process is accessing the counter no other process can access it to increment the counter
+     */
     public void increment(){
         try {
             semaphore.acquire();
@@ -14,6 +20,9 @@ public class SignalIndicator {
         }
     }
 
+    /**
+     * Whenever a thread process is accessing the counter no other process can access it to decrement the counter
+     */
     public void decrement(){
         try {
             semaphore.acquire();
